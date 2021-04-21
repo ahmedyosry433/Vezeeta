@@ -53,3 +53,5 @@ class UpdateProfileForm(forms.ModelForm):
         model = Profile
 
         fields = ('name', 'subtitle', 'adresss', 'adresss_detail', 'number_phone','working_hours', 'wating_time', 'who_i', 'price', 'img', 'facebook', 'twitter', 'google', 'specialist_doctor')
+
+

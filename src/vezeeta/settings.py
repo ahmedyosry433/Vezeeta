@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'blog',
     'crispy_forms',
     'bootstrap4',
 ]
@@ -134,4 +135,15 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 LOGIN_URL = 'account:login'
+
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 4*60
+SESSION_SAVE_EVERY_REQUEST = True
+
+
+

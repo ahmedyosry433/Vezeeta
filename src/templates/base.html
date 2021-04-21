@@ -72,10 +72,10 @@
                             {%else%}
 
                                 <div class="phone_num d-none d-xl-block">
-                                    <a class="boxed-btn3" href="">تسجيل الدخول</a>
+                                    <a class="boxed-btn3" href="{% url 'account:login' %}">تسجيل الدخول</a>
                                 </div>
                                 <div class="d-none d-lg-block">
-                                    <a class="boxed-btn3" style="background-color: crimson;" href="">التسجيل</a>
+                                    <a class="boxed-btn3" style="background-color: crimson;" href="{% url 'account:signup' %}">التسجيل</a>
                                 </div>
                             {% endif %}
                         </div>
