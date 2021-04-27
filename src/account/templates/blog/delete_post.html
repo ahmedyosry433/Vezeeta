@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete Post {% endblock title %}
+{%block body%}
+
+{% include 'user/search.html' %} 
+
+
+
+<div dir="rtl">
+    <!-- bradcam_area  -->
+
+
+
+<div class="row " style="padding-right: 30%; margin-top: 44px; ">
+    <div class="col-md-8 ">
+    <form method="POST" enctype='multipart/form-data'>
+        <!-- We using object not post because we using class based view -->
+        <h3> هل انت متأكد من حذف  "  " ؟</h3> 
+        {% csrf_token %}
+        <div class="section-row">
+            <div class="row button-delate" >
+                <div class="form-group btn-editing" >
+                    <a class="btn btn-success" href="{% url 'blog:blog_list' %}">تراجع</a>
+                    <input class="btn btn-danger" type="submit" value="حذف" name="delete">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+
+{% endblock %}

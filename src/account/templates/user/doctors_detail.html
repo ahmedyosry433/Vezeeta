@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} doctor detials{% endblock title %}
 {%block body%}
 
 
@@ -22,7 +23,7 @@
                                 {% endif %}
                         </div>
                         <div class="jobs_conetent">
-                            <a href="#" ><h4>{{doctors_detail.name}}</h4></a>
+                            <a href="#" ><h4> الدكتور {{doctors_detail.name}} </h4></a>
                             <div class="links_locat d-flex align-items-center">
                                 <div class="location">
                                     <p> <i class="fa fa-map-marker"></i> مصر  ,{{doctors_detail.adresss}} </p>

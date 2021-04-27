@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Appointment {% endblock title %}
+{%block body%}
+{% include 'user/search.html' %} 
+
+
+<div dir="rtl">
+<div class="container">
+    <div class="signup">
+
+        <div class="col-md-8" >
+            <form method="POST" enctype="multipart/form-data">
+                <h4 class="auth-header"> احجز ميعاد ...</h4>
+
+
+                <div class="form-group">
+                    <input type="" name="">
+                </div>
+                <div class="form-group">
+                    <input type="" name="">
+                </div>
+                <div class="form-group">
+                    <input type="" name="">
+                </div>
+                <div class="buttons-w  "><button type="submit" class="btn btn-danger ml-5">احجز</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+{%endblock%}

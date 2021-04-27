@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog List{% endblock title %}
+{%block body%}
+
+{% include 'user/search.html' %} 
+
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+
+                <div class="blog_left_sidebar">
+                    {% for alls in all %}
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img class="card-img rounded-0" src="{{alls.img.url}}" alt="">
+
+                            <a href="" class="blog_item_date">
+                                <h3>{{alls.created_in|time:"f A" }}</h3>
+                                <p>{{alls.created_in|date:"l" }}</p>
+
+                            </a>
+                        </div>
+
+
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="{% url 'blog:blog_detail' alls.slug %}">
+                                <h2>{{alls.title}}</h2>
+                            </a>
+                            <p>{{alls.description|truncatewords:50}}</p>
+                            <ul class="blog-info-link">
+                                <li><a href=" {%url 'account:myprofile'%} "><i class="fa fa-user"></i> {{alls.user.first_name}}{{alls.user.last_name}} </a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                            </ul>
+                        </div>
+
+                    </article>
+                    {% endfor %}
+
+                    {% if all.has_other_pages %}
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+
+                            {% if all.has_previous %}
+                            <li class="page-item">
+                                <a href="?page={{ all.previous_page_number }}" class="page-link" aria-label="Previous">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                            </li>
+                            {%endif%} 
+
+                            {% for i in all.paginator.page_range %}
+                            <li class="page-item">
+                                <a href="?page={{i}}" class="page-link">{{i}}</a>
+                            </li>
+                            {%endfor%} 
+
+                            {% if all.has_next %}
+                            <li class="page-item">
+                                <a href="?page={{ all.next_page_number }}" class="page-link" aria-label="Next">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    {% include 'blog/search_blog.html' %}
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">أحدث المقالات</h3>
+
+                        {% for olds in old %}
+                        <div class="media post_item">
+                            <img src="img/blog/single_blog_1.png" alt="" style="width: 30spx; height: 30px;">
+                            <div class="media-body">
+                                <a href="{% url 'blog:blog_detail' olds.slug %}">
+                                    <h3>{{olds.title}}</h3>
+                                </a>
+                                <p>تم النتشر في : <span style="color: #00D363;">{{olds.created_in|date:'j n Y'}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock  %}

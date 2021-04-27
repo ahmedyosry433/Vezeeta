@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.utils.text import slugify
 from django.utils.timezone import datetime
+from django.dispatch import receiver
 
 TYPE_OF_PERSON=(
     ('M',"Male"),
@@ -61,9 +62,19 @@ class Profile (models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    
+    
 
     def create_profile(sender, **kwargs):
         if kwargs['created']:
             Profile.objects.create(user=kwargs['instance'] )
-            
+
     post_save.connect(create_profile, sender=User)
+
+    # @receiver(post_save, sender=User)
+    # def created_user (sender, instance , created,**kwargs):
+    #     if created :
+    #         Profile.objects.create(user=instance)
+    #     instance.profile.save()
+

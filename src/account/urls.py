@@ -12,6 +12,9 @@ urlpatterns = [
     path('myprofile/', views.myprofile, name='myprofile'),
     path('update_profile/', views.update_profile, name='update_profile'),
     path('signup/', views.signup, name='signup'),
+    path('logout/', views.logout_req, name='logout'),
+    path('appointment/', views.appointment, name='appointment'),
+    
     
     
     path('<slug:slug>/', views.doctors_detail, name='doctors_detail'),
