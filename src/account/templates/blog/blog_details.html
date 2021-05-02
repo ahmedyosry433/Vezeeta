@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %}blog detials{% endblock title %}
 {%block body%}
 
@@ -39,7 +39,21 @@
                 
                 <h2>{{detail.title}}</h2>
                 <h3>{{detail.description}}</h3>
-                <a id="likebutton" class=" btn btn-primary btn-lg" id="like" name=""  data-catid="" href="{{detail.get_like_url}}" data-catid="">Like {{detail.likes.count}}</a> </p> <p id="message"></p>
+
+                <form  action=" {% url 'blog:like_post' detail.slug  %} " method="POST" enctype='multipart/form-data' class="ui form">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{detail.slug}}">
+                    
+                    {% if user not in detail.liked.all %}
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like   </button>
+                    {% else %}
+                         <button class="btn btn-primary" type="submit"><i class="fa fa-thumbs-down" aria-hidden="true"> Unlike  </i> </button>
+                    {% endif %}
+            
+                </form>
+                <strong>{{detail.liked.count}} Likes</strong>
+
+            
                 <ul class="blog-info-link mt-3 mb-4">
                 <li><a href="#"><i class="fa fa-user"></i><p>تجميل و زراعه الاسنان  بكالريوس علوم جامعة بورك تجميل و زراعه الاسنان  بكالريوس علوم جامعة بورك تجميل و زراعه الاسنان  بكالريوس علوم جامعة بورك</p> </a></li>
                 <li><a href="#"><i class="fa fa-comments"></i> 4 كومنتات</a></li>
@@ -87,14 +101,14 @@
                             <img src="img/comment/comment_2.png" alt="">
                         </div>
                         <div class="desc">
-                            <p class="comment">هذا المقال مفيد جدا
+                            <p class="comment">{{comments.body}}
                             </p>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <h5>
                                         <a href="#">محمود رؤف</a>
                                     </h5>
-                                    <p class="date">2/2/2020 </p>
+                                    <p class="date"> </p>
                                 </div>
                                 <div class="reply-btn">
                                     <a href="#" class="btn-reply text-uppercase">reply</a>
@@ -109,25 +123,25 @@
 
         <div class="comment-form">
             <h4>Leave a Reply</h4>
+            
             <form method="POST" class="form-contact comment_form" enctype="multipart/form-data">
-
+                {% csrf_token %}
                 <div class="row">
                     <div class="col-12">
                     </div>
                     <div class="col-12">
                     <div class="form-group">
-                        <textarea class="form-control w-100" name="comments" id="comments" cols="30" rows="9"
-                            placeholder="Write Comment"></textarea>
+                        {{comment_form.body|as_crispy_field}}
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                       {{comment_form.name|as_crispy_field}}
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                        {{comment_form.email|as_crispy_field}}
                     </div>
                 </div>
         
@@ -136,7 +150,10 @@
                 <button type="submit" class="button button-contactForm btn_1 boxed-btn" >Send Message</button>
                 
             </div>
+            
             </form>
+          
+
         </div>        </div>
     <div class="col-lg-4">
         <div class="blog_right_sidebar">

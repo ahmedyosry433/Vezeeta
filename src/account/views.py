@@ -67,7 +67,7 @@ def myprofile(request):
 
 ###############################################################################################
 # Update Profile
-@login_required()
+
 def update_profile(request):
 
     user_form = UpdateUserForm(instance=request.user)
