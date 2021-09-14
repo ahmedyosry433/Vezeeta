@@ -45,13 +45,18 @@
                     <input type="hidden" name="post_id" value="{{detail.slug}}">
                     
                     {% if user not in detail.liked.all %}
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like   </button>
+                        <button  type="submit" class="btn btn-primary">
+                            <i class="fa fa-thumbs-up" aria-hidden="true" style="margin: 7px;">Like</i> <span class="badge badge-light">{{detail.liked.count}}</span>
+                        </button>
+                        
                     {% else %}
-                         <button class="btn btn-primary" type="submit"><i class="fa fa-thumbs-down" aria-hidden="true"> Unlike  </i> </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-thumbs-down" aria-hidden="true">Unlike</i> <span class="badge badge-light">{{detail.liked.count}}</span>
+                     </button>
                     {% endif %}
             
                 </form>
-                <strong>{{detail.liked.count}} Likes</strong>
+                
 
             
                 <ul class="blog-info-link mt-3 mb-4">
@@ -93,20 +98,22 @@
             </div>
         </div>
         <div class="comments-area">
-            <h4>05 Comments</h4>
+            <h4>{{detail.comment.body.count}} Comments</h4>
             <div class="comment-list">
                 <div class="single-comment justify-content-between d-flex">
                     <div class="user justify-content-between d-flex">
                         <div class="thumb">
                             <img src="img/comment/comment_2.png" alt="">
                         </div>
+                        
                         <div class="desc">
-                            <p class="comment">{{comments.body}}
+                            {% for comment in comments %}
+                            <p class="comment">{{comment.body}}
                             </p>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <h5>
-                                        <a href="#">محمود رؤف</a>
+                                        <a href="#">{{comment.name}}</a>
                                     </h5>
                                     <p class="date"> </p>
                                 </div>
@@ -114,7 +121,9 @@
                                     <a href="#" class="btn-reply text-uppercase">reply</a>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
+                        
                     </div>
                 </div>
             </div>

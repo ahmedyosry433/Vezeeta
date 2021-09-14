@@ -38,7 +38,7 @@ def blog_detail(request , slug):
     new_comment = None
     # Comment posted
     if request.method == 'POST':
-        comment_form = CommentForm(request.POST ,request.FILES or None)
+        comment_form = CommentForm(request.POST ,request.FILES)
         if comment_form.is_valid():
 
             # Create Comment object but don't save to database yet
@@ -59,7 +59,6 @@ def blog_detail(request , slug):
         'comments': comments,
         'new_comment': new_comment,
         'comment_form': comment_form
-        
     }
     return render (request, 'blog/blog_details.html' , context)
 

@@ -31,7 +31,7 @@ class UpdateUserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
 
-class UserCreationForms(UserCreationForm):
+class SignupForm(UserCreationForm):
 
     username = forms.CharField(label='اسم المستخدم')
     first_name = forms.CharField(label='الاسم الاول')

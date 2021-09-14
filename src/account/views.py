@@ -6,7 +6,7 @@ from account.models import Profile
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from .models import Profile
-from .forms import Login_Form, UpdateUserForm, UserCreationForms, UpdateProfileForm 
+from .forms import Login_Form, UpdateUserForm, SignupForm, UpdateProfileForm 
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -94,20 +94,18 @@ def update_profile(request):
 
 def signup(request):
     if request.method == 'POST':
-        form  = UserCreationForms(request.POST)
+        form  = SignupForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             raw_pass = form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=raw_pass )
-            user.is_staff = True
-            user.is_superuser = True
             user.save()
-            login(request,user)
+            login(request,user,backend='django.contrib.auth.backends.ModelBackend')
            
             return redirect('account:update_profile')
     else:
-        form = UserCreationForms()
+        form = SignupForm()
 
     context = {
         'form1': form
